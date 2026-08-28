@@ -50,8 +50,23 @@
 
 [INFO] Для уточнения: --mode refine --refine-steps 200
 ```
+```
+ python zaya_train_pareto.py     --mode pareto     --min-params 339e6 --max-params 341e6     --max-memory 9.9     --use-8bit --bf16  --pareto-trials 2     --pareto-out pareto_339_341M.json   --mode refine --refine-steps 200
+[INFO] Лог: training_log_20260828_161655.txt
+[REFINE] Уточняю 4 моделей, шагов: 200
+[1/4] 1024/5/16 s=512 b=32 340M | 🚀
+                     ⚠️ OOM bs=32→16
+                     ✅ 0.7129 6993tps b=16/32 5.9GB
+[2/4] 1024/5/16 s=256 b=16 340M | 🚀
+                     ✅ 0.9402 6854tps b=16/16 4.1GB
+[3/4] 768/9/16 s=256 b=16 340M | 🚀
+                     ✅ 0.9436 6969tps b=16/16 6.1GB
+[4/4] 768/9/16 s=1024 b=4 340M | 🚀
+                     ✅ 1.0718 6729tps b=4/4 6.4GB
 
-
+[REFINE] Уточнено: 4 | Фронт: 1 | pareto_339_341M.refined.json
+[FRONT] loss=0.7129 tps=6992.9 params=340.09M dim=1024 layers=5 heads=16 experts=16 seq=512 batch=16
+```
 
 🔧 [Кодъ и инструкціи](#)  
 📄 [Полный переводъ техническаго отчета (дореформенная орѳографія)](#)
