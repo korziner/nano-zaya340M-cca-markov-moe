@@ -9,6 +9,50 @@
 
 Обучите малую MoE‑модель (~340M параметровъ), которая мыслитъ глубоко и укладывается въ скромный бюджетъ памяти.
 
+
+```
+ python zaya_train_pareto.py     --mode pareto     --min-params 339e6 --max-params 341e6     --max-memory 9.9     --use-8bit --bf16  --pareto-trials 2     --pareto-out pareto_339_341M.json  --top-by-tps 50 
+[INFO] Лог: training_log_20260828_155412.txt
+[INFO] Автоматически найден профиль железа: zaya_bench_results.json
+[INFO] Профиль железа: 276 форм из zaya_bench_results.json
+[PRECOMPUTE] Проверено 75600 комбинаций, допустимых: 1140
+[TOP-TPS] Отобрано 50 самых быстрых из 1140 конфигураций
+
+[EXAMPLES] Примеры допустимых конфигураций:
+  📦 Крупнейшие модели:
+     dim=768  lay=9  exp=16 b=32 seq=256  |    341M |    3996tps |   8.9GB
+     dim=768  lay=9  exp=16 b=16 seq=512  |    341M |    3996tps |   8.9GB
+     dim=768  lay=9  exp=16 b=8  seq=1024 |    341M |    3996tps |   8.9GB
+  ⚡ Быстрейшие модели (по данным бенчмарка):
+     dim=768  lay=9  exp=16 b=32 M=8192  |    340M |    4064tps |   8.9GB
+     dim=768  lay=9  exp=16 b=16 M=8192  |    340M |    4064tps |   8.9GB
+     dim=768  lay=9  exp=16 b=8  M=8192  |    340M |    4064tps |   8.9GB
+  💾 Компактнейшие по памяти:
+     dim=768  lay=9  exp=16 b=16 |    340M |    3923tps |   7.6GB
+     dim=768  lay=9  exp=16 b=8  |    340M |    3923tps |   7.6GB
+     dim=768  lay=9  exp=16 b=4  |    340M |    3923tps |   7.6GB
+  🚀 Максимальный батч (лучшая утилизация GPU):
+     dim=768  lay=9  exp=16 b=32 |    340M |    4064tps |   8.9GB
+     dim=768  lay=9  exp=16 b=32 |    340M |    4064tps |   8.9GB
+     dim=768  lay=9  exp=16 b=32 |    340M |    4064tps |   8.9GB
+
+[INFO] Найдено 40 трейлов в pareto_339_341M.db, добавлю ещё 2
+#045 768/9/16 h=1459 s=256 b=32 341M 8.9GB | 🚀
+                     ✅ 4.0379 7241tps b=32/32 6.0GB
+#046 768/9/16 h=1459 s=1024 b=4 340M 8.9GB | 🚀
+                     ✅ 4.3417 7374tps b=4/4 6.8GB
+
+[PARETO] Результатов: 38 | Фронт: 4 | pareto_339_341M.json
+[FRONT] loss=3.2977 tps=7737.6 params=340.09M peak=9.65GB dim=1024 layers=5 heads=16 experts=16 seq=512 batch=32
+[FRONT] loss=3.7960 tps=7742.6 params=340.43M peak=4.00GB dim=1024 layers=5 heads=4 experts=16 seq=256 batch=16
+[FRONT] loss=4.1047 tps=7837.9 params=340.35M peak=5.95GB dim=768 layers=9 heads=8 experts=16 seq=256 batch=16
+[FRONT] loss=4.2385 tps=7917.9 params=340.35M peak=6.25GB dim=768 layers=9 heads=4 experts=16 seq=1024 batch=4
+
+[INFO] Для уточнения: --mode refine --refine-steps 200
+```
+
+
+
 🔧 [Кодъ и инструкціи](#)  
 📄 [Полный переводъ техническаго отчета (дореформенная орѳографія)](#)
 
